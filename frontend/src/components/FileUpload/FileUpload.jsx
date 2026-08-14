@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-
 import "./FileUpload.css";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -7,7 +6,7 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ALLOWED_TYPES = [
   "image/jpeg",
   "image/png",
-  "image/webp"
+  "image/webp",
 ];
 
 function FileUpload() {
@@ -109,24 +108,17 @@ function FileUpload() {
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open(
-      "POST",
-      "http://localhost:5000/api/upload"
-    );
+    xhr.open("POST", "/api/upload");
 
-    xhr.upload.addEventListener(
-      "progress",
-      function (event) {
-        if (event.lengthComputable) {
-          const percentage =
-            Math.round(
-              (event.loaded / event.total) * 100
-            );
+    xhr.upload.addEventListener("progress", function (event) {
+      if (event.lengthComputable) {
+        const percentage = Math.round(
+          (event.loaded / event.total) * 100
+        );
 
-          setProgress(percentage);
-        }
+        setProgress(percentage);
       }
-    );
+    });
 
     xhr.onload = function () {
       setUploading(false);
@@ -144,7 +136,7 @@ function FileUpload() {
           response = JSON.parse(xhr.responseText);
         } catch {
           response = {
-            message: "Upload failed."
+            message: "Upload failed.",
           };
         }
 
@@ -177,7 +169,6 @@ function FileUpload() {
 
   return (
     <div className="upload-card">
-
       <div className="upload-header">
         <h1>Image Upload</h1>
 
@@ -205,9 +196,7 @@ function FileUpload() {
           onDrop={handleDrop}
           onClick={openFilePicker}
         >
-          <div className="upload-icon">
-            ⬆️
-          </div>
+          <div className="upload-icon">⬆️</div>
 
           <h2>Drag & Drop your image here</h2>
 
@@ -221,7 +210,6 @@ function FileUpload() {
 
       {selectedFile && (
         <div className="preview-section">
-
           <div className="preview-container">
             <img
               src={preview}
@@ -240,7 +228,6 @@ function FileUpload() {
 
           {!uploading && !uploadedFile && (
             <div className="preview-actions">
-
               <button
                 className="upload-button"
                 onClick={uploadFile}
@@ -254,16 +241,13 @@ function FileUpload() {
               >
                 Remove
               </button>
-
             </div>
           )}
-
         </div>
       )}
 
       {uploading && (
         <div className="progress-section">
-
           <div className="progress-info">
             <span>Uploading...</span>
             <span>{progress}%</span>
@@ -273,11 +257,10 @@ function FileUpload() {
             <div
               className="progress-fill"
               style={{
-                width: `${progress}%`
+                width: `${progress}%`,
               }}
             />
           </div>
-
         </div>
       )}
 
@@ -295,7 +278,6 @@ function FileUpload() {
 
       {uploadedFile && (
         <div className="uploaded-section">
-
           <h2>Uploaded Image</h2>
 
           <img
@@ -304,9 +286,7 @@ function FileUpload() {
             alt={uploadedFile.originalName}
           />
 
-          <p>
-            {uploadedFile.originalName}
-          </p>
+          <p>{uploadedFile.originalName}</p>
 
           <a
             href={uploadedFile.url}
@@ -315,10 +295,8 @@ function FileUpload() {
           >
             Open Uploaded Image
           </a>
-
         </div>
       )}
-
     </div>
   );
 }
