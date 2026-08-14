@@ -108,7 +108,10 @@ function FileUpload() {
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "/api/upload");
+xhr.open(
+  "POST",
+  "/api/upload"
+);
 
     xhr.upload.addEventListener("progress", function (event) {
       if (event.lengthComputable) {
