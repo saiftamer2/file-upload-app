@@ -1,8 +1,10 @@
 # File Upload App
 
-
-
 The application allows users to select or drag and drop an image, preview it before uploading, validate the file, upload it to the backend, and display the uploaded image after a successful upload.
+
+## 🌐 Live Demo
+https://file-upload-app-nu.vercel.app/
+
 
 ## Technologies Used
 
